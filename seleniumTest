@@ -1,0 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+driver = webdriver.Chrome((ChromeDriverManager().install()))
+
+driver.get("https://www.amazon.in/")
+driver.maximize_window()
+
+
+time.sleep(0)
+
+account_list = driver.find_element_by_xpath("//*[@id='nav-link-accountList']/span/span")
+account_list.click()
+
+#credentials
+email = driver.find_element_by_name("email").send_keys("9780704963")
+continue_btn = driver.find_element_by_id("continue")
+continue_btn.click()
+
+password = driver.find_element_by_id("ap_password").send_keys("Shadyemi@2701")
+sign_in = driver.find_element_by_id("signInSubmit")
+sign_in.click()
+
+driver.implicitly_wait(5)
+account_list = driver.find_element_by_xpath('//*[@class="nav-line-2 "]')
+ActionChains(driver).move_to_element(account_list).perform()
+your_recommendations = driver.find_element_by_xpath('//*[@id="nav-al-your-account"]/a[5]/span')
+your_recommendations.click()
+
+
+
+
+
+
+
